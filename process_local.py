@@ -1,5 +1,7 @@
 """
+ECE196 Face Recognition Project
 Author: W Chen
+
 Prerequisite: You need to install OpenCV before running this code
 The code here is an example of what you can write to print out 'Hello World!'
 Now modify this code to process a local image and do the following:
