@@ -2,6 +2,7 @@
   <dictionary name="willc">
     <words>
       <w>convolutional</w>
+      <w>finetune</w>
       <w>softmax</w>
       <w>tanh</w>
     </words>

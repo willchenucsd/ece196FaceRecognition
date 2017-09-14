@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a8bf2e02-2e8c-4710-a457-c3ae4f38b293" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/create_network.py" afterPath="$PROJECT_DIR$/create_network.py" />
-    </list>
+    <list default="true" id="a8bf2e02-2e8c-4710-a457-c3ae4f38b293" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.idea/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,13 +12,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="create_network.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/create_network.py">
+      <file leaf-file-name="train_vgg.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/train_vgg.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="68" lean-forward="true" selection-start-line="4" selection-start-column="68" selection-end-line="4" selection-end-column="68" />
+            <state relative-caret-position="246">
+              <caret line="25" column="4" lean-forward="false" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
               <folding>
-                <element signature="e#1094#1131#0" expanded="true" />
+                <element signature="e#162#192#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -45,6 +43,7 @@
         <option value="$PROJECT_DIR$/process_local.py" />
         <option value="$PROJECT_DIR$/process_realtime.py" />
         <option value="$PROJECT_DIR$/create_network.py" />
+        <option value="$PROJECT_DIR$/train_vgg.py" />
       </list>
     </option>
   </component>
@@ -223,22 +222,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/process_realtime.py">
+    <entry file="file://$PROJECT_DIR$/create_network.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="23" lean-forward="true" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+        <state relative-caret-position="51">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding>
-            <element signature="e#399#436#0" expanded="false" />
+            <element signature="e#1094#1131#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/create_network.py">
+    <entry file="file://$PROJECT_DIR$/process_realtime.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="68" lean-forward="true" selection-start-line="4" selection-start-column="68" selection-end-line="4" selection-end-column="68" />
+        <state relative-caret-position="17">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train_vgg.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="25" column="4" lean-forward="false" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
           <folding>
-            <element signature="e#1094#1131#0" expanded="true" />
+            <element signature="e#162#192#0" expanded="true" />
           </folding>
         </state>
       </provider>
