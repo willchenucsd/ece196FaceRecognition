@@ -59,6 +59,23 @@ def load_model():
     return model
 
 
+def process_image(image):
+    # zero pad 5-pixel boundary
+    temp = np.zeros((img_height+10, img_width+10, num_channel))
+    temp[5:img_height+5, 5:img_height+5, :] = image
+    # random horizontal flip
+    flip = np.asarray(range(2))
+    flip_choice = np.random.choice(flip)
+    if flip_choice == 1:
+        temp = cv2.flip(temp, 1)
+    # random cropping
+    crop = np.asarray(range(10))
+    crop_choice = np.random.choice(crop, 2, False)  # starting pixel location
+    row, col = crop_choice[0], crop_choice[1]
+    new_image = temp[row:row+img_height, col:col+img_width, :]
+    return new_image
+
+
 def load_data(src_path):
     # under train/val/test dirs, each class is a folder with numerical numbers
     class_path_list = sorted(glob.glob(os.path.join(src_path, '*')))
