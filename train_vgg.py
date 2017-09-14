@@ -11,7 +11,7 @@ Use this as a template to:
 
 
 from keras.models import Model
-from keras import applications
+from keras.applications.vgg16 import VGG16
 from keras import optimizers
 from keras.layers import Dropout, Flatten, Dense
 from keras.utils.np_utils import to_categorical
@@ -21,8 +21,8 @@ import os
 import cv2
 import random
 
-img_height, img_width, num_channel = 224, 224, 3
-mean_pixel = np.array([104., 117., 123.]).reshape((1,1,3))
+IMG_H, IMG_W, NUM_CHANNEL = 224, 224, 3
+MEAN_PIXEL = np.array([104., 117., 123.]).reshape((1,1,3))
 train_data_dir = 'data/train'
 validation_data_dir = 'data/validation'
 test_data_dir = 'data/test'
@@ -34,8 +34,7 @@ task_name = 'fr_withNewFrontal_3'
 
 def load_model():
     # build the VGG16 network
-    base_model = applications.vgg16.VGG16(weights='imagenet', include_top=False,
-                                    input_shape=(img_height, img_width, num_channel))
+    base_model = VGG16(weights='imagenet', include_top=False, input_shape=(IMG_H, IMG_W, NUM_CHANNEL))
     print('Model weights loaded.')
     x = base_model.output
     flat = Flatten()(x)
@@ -61,8 +60,8 @@ def load_model():
 
 def process_image(image):
     # zero pad 5-pixel boundary
-    temp = np.zeros((img_height+10, img_width+10, num_channel))
-    temp[5:img_height+5, 5:img_height+5, :] = image
+    temp = np.zeros((IMG_H+10, IMG_W+10, NUM_CHANNEL))
+    temp[5:IMG_H+5, 5:IMG_H+5, :] = image
     # random horizontal flip
     flip = np.asarray(range(2))
     flip_choice = np.random.choice(flip)
@@ -72,7 +71,7 @@ def process_image(image):
     crop = np.asarray(range(10))
     crop_choice = np.random.choice(crop, 2, False)  # starting pixel location
     row, col = crop_choice[0], crop_choice[1]
-    new_image = temp[row:row+img_height, col:col+img_width, :]
+    new_image = temp[row:row+IMG_H, col:col+IMG_W, :]
     return new_image
 
 
@@ -85,7 +84,7 @@ def load_data(src_path):
     random.shuffle(image_path_list)
     image_counter = len(image_path_list)
     print 'This set has {} images.'.format(image_counter)
-    X = np.zeros((image_counter, img_height, img_width, num_channel))
+    X = np.zeros((image_counter, IMG_H, IMG_W, NUM_CHANNEL))
     Y = np.zeros((image_counter, 1))
     # read images and labels
     for i in range(image_counter):
@@ -93,9 +92,9 @@ def load_data(src_path):
         label = int(image_path.split('/')[-2])
         image = cv2.imread(image_path, 1)
         image = process_image(image)
-        #image = cv2.resize(image, (img_height, img_width)) - mean_pixel
-        #image = image.reshape((img_height, img_width, num_channel))
-        image -= mean_pixel
+        #image = cv2.resize(image, (IMG_H, IMG_W)) - MEAN_PIXEL
+        #image = image.reshape((IMG_H, IMG_W, NUM_CHANNEL))
+        image -= MEAN_PIXEL
         X[i, :, :, :] = image
         Y[i, :] = label
     Y = to_categorical(Y, num_classes)
