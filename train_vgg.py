@@ -34,7 +34,7 @@ task_name = 'fr_withNewFrontal_3'
 
 def load_model():
     # build the VGG16 network
-    base_model = applications.VGG16(weights='imagenet', include_top=False,
+    base_model = applications.vgg16.VGG16(weights='imagenet', include_top=False,
                                     input_shape=(img_height, img_width, num_channel))
     print('Model weights loaded.')
     x = base_model.output
