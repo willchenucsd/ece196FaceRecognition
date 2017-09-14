@@ -2,7 +2,7 @@
 ECE196 Face Recognition Project
 Author: W Chen
 
-Adapted from: https://keras.io/getting-started/sequential-model-guide/
+Adapted from: https://keras.io/getting-started/functional-api-guide/
 
 Modify this code to write a LeNet with the following requirements:
 * Input dimensions: 32x32x1
