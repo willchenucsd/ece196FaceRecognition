@@ -43,7 +43,7 @@ def load_model():
     drop = Dropout(0.5)(hidden)
     predictions = Dense(num_classes, activation='softmax')(drop)
     # this is the model we will train
-    model = Model(input=base_model.input, output=predictions)
+    model = Model(inputs=base_model.input, outputs=predictions)
     print 'Model building complete.'
 
     # first: train only the top layers (which were randomly initialized)
