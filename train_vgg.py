@@ -30,12 +30,13 @@ NUM_CLASSES = 20  #TODO
 
 
 def load_model():
-    # TODO: load lower layers of vgg16 network and declare it as base_model
+    # TODO: use VGG16 to load lower layers of vgg16 network and declare it as base_model
     # TODO: use 'imagenet' for weights, include_top=False, (IMG_H, IMG_W, NUM_CHANNELS) for input_shape
 
     print('Model weights loaded.')
     base_out = base_model.output
-    # TODO: add a flat layer, a dense layer, a dropout layer and another dense layer for output
+    # TODO: add a flatten layer, a dense layer with 256 units, a dropout layer with 0.5 rate,
+    # TODO: and another dense layer for output. The final layer should have the same number of units as classes
 
     model = Model(inputs=base_model.input, outputs=predictions)
     print 'Build model'
