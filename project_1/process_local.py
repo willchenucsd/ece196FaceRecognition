@@ -14,7 +14,7 @@ All the above steps should be in one function called process_image()
 """
 
 
-# TODO: edit this function
+# TODO: Edit this function
 def process_image():
     return
 
