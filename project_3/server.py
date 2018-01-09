@@ -1,94 +1,96 @@
 """
 ECE196 Face Recognition Project
-Author: W Chen
+Author: W Chen, Simon Fong
 
 What this script should do:
-0. assume the local host is already connected to ec2 instance
-1. load model with saved weights
-2. use a loop to do:
-    2.1. check if a new face image is saved in IMG_SRC_DIR.
-    2.2. process and classify the image
-    2.3. save the classification result in RESULT_DIR.
+1. Load a model with saved weights.
+2. Create a webserver.
+3. Handle classification requests:
+    3.1 Save the image from the request.
+    3.2 Load the image and classify it.
+    3.3 Send the label and confidence back to requester(Pi).
 """
-
-
-import glob, os, time, cv2
+import cv2
 import numpy as np
 from keras.models import load_model
+from flask import Flask, request, jsonify
 
-# TODO: some parameters you might use
-IMG_SRC_DIR = ''  # ec2
-RESULT_DIR = ''  # ec2
-RESULT_FILE_NAME = 'result.txt'
+app = Flask(__name__)
 
+# TODO: Read saved weights and name it 'model'
 
-def check_new_file(path):
+def classify(path_to_image):
     """
-    check if a new file is available in the given directory
-    :param path: path of the directory to check
-    :return: path of the file if available; None if not available
+    Classify a face image
+    :param path_to_image: Path of face image
+    :return: label and confidence in a dictionary
     """
-    new_file_path = None
-    file_path = os.path.join(path,'*')
-    file_list = sorted(glob.glob(file_path))
-    if len(file_list) == 1:
-        new_file_path = file_list[0]
-    return new_file_path
-
-
-def classify(file_path, model):
-    """
-    classify a face image
-    :param file_path: path of face image
-    :param model: model to use
-    :return: classification results label and confidence
-    """
+    
+    # Image dimensions that the model expects
     img_height, img_width, num_channel = 224, 224, 3
+    
+    # Used for VGG16 to normalize the images
     mean_pixel = np.array([104., 117., 123.]).reshape((1, 1, 3))
 
-    # TODO: use opencv to read and resize image to standard dimensions
-    # TODO: subtract mean_pixel from that image, name the final image as new_img
+    # TODO: Use opencv to read and resize image to standard dimensions
 
-    x = np.expand_dims(new_img, axis=0)
+    
+    # TODO: Subtract mean_pixel from the image store the new image in 
+    # a variable called 'normalized_image'
+     
+    
+    # Turns image shape of (2,) to (1,2)
+    image_to_be_classified = np.expand_dims(normalized_image, axis=0)
 
-    # TODO: use network to predict x, get label and confidence of prediction
-    # TODO: label is a number, which correspond to the same number you give to the folder when you organized data
+    # TODO: Use network to predict the 'image_to_be_classified' and
+    # get an array of prediction values
+    
+    
+    # TODO: Get the predicted label which is defined as follows:
+    # Label = the index of the largest value in the prediction array
+    # This label is a number, which corresponds to the same number you 
+    # give to the folder when you organized data
+    
+    
+    # TODO: Calculate confidence according to the following metric:
+    # Confidence = prediction_value / sum(all_prediction_values)
+    # Be sure to call your confidence value 'conf'
+    
+    prediction = {'label': label,
+                  'confidence': conf}
 
-    return label, conf
+    return prediction
 
-
-def write_result(label, conf):
-    """
-    write label and confidence to a txt file
-    :param label: predicted class
-    :param conf: confidence of prediction
-    """
-    # open file to write in
-    result_file = open(os.path.join(RESULT_DIR, RESULT_FILE_NAME), 'w')
-    # TODO: convert the label to a name. Eg. if the label of your face is 20, save your name as "name"
-
-    result = ','.join([name, str(conf)])
-    result_file.write(result)
-    result_file.close()
-    return
-
-
+@app.route('/predict')
+def predict():
+    """Receives an image, classifies the image, and responds with the label."""
+    
+    # This extracts the image data from the request
+    image = request.args.get('file')
+    starter = image.find(',')
+    image_data = image[starter+1:]
+    
+    #Path where the image will be saved
+    temp_image_name = 'temp.jpg'
+    
+    # Decodes the image data and saves the image to disk                   
+    with open(temp_image_name, 'wb') as fh:
+        fh.write(image_data.decode('base64'))
+    
+    # TODO: Call classify to predict the image and save the result to a 
+    # variable called 'prediction'
+    prediction = classify(temp_image_name)
+    
+    # Converts python dictionary into JSON format
+    prediction_json = jsonify(prediction)
+    
+    # Respond to the request (Send prediction back to Pi)    
+    return prediction_json
+        
 def main():
-    # TODO: read saved weights and name it model
+    # Starts the webserver
+    app.run(host='0.0.0.0', port=80)
 
-    model.summary()
-
-    print 'Starting ...'
-
-    # TODO: use a loop to check for file
-    while True:
-        # TODO: check if a new face image is saved
-
-        # TODO: if new face image available, classify it and save result to a txt file
-        # TODO: wait for 10 seconds (by then, the result should've been fetched by RPi) and delete image and result files
-
-        time.sleep(1)
-
-
+# Runs the main function if this file is run directly
 if __name__ == "__main__":
     main()
