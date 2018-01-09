@@ -10,9 +10,9 @@ Modify this code to write a LeNet with the following requirements:
   strides: 1 both horizontally and vertically, activation function: sigmoid
 * S2: max pooling layer, output: 6 layers of 14x14 feature maps, pooling size: 2x2,
   strides: 2 both horizontally and vertically
-* C3: convolutional layer, output: 16 layers of 28x28 feature maps, filter size: 5x5,
+* C3: convolutional layer, output: 16 layers of 10x10 feature maps, filter size: 5x5,
   strides: 1 both horizontally and vertically, activation function: sigmoid
-* S4: max pooling layer, output: 16 layers of 28x28 feature maps, pooling size: 2x2,
+* S4: max pooling layer, output: 16 layers of 5x5 feature maps, pooling size: 2x2,
   strides: 2 both horizontally and vertically
 * C5: convolutional layer, output: 120 layers of 1x1 feature maps, filter size: 5x5, activation function: sigmoid
 * F6: fully connected layer, output 84-dimensional vector, activation function: tanh
